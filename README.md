@@ -19,4 +19,5 @@ Para poder colocar seu e-mail no python é necessário liberar a autenticação 
 ## Autores
 
 - [@Andre_natu](https://www.github.com/Andre-Natu)
+- [@eliasvictorr](https://github.com/eliasvictorr) 
 
